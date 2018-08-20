@@ -5,19 +5,20 @@ import * as LoginActions from '../domain/login/LoginActions';
 
 export function* WatchAll() {
 	yield [
-		takeEvery(LoginConstants.GET_USER_SAGA, getUser),
+		takeEvery(LoginConstants.HANDLE_GET_USER_SAGA, getUserSaga),
 
 
 	];
 }
 
-export function* getUser(action) {
+export function* getUserSaga(action) {
 	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
 	});
-	let data = yield fetch(`http://localhost:8080/user/login?email=${action.email}`, {
+	console.log(action.email);
+	let data = yield fetch(`http://localhost:8080/user/login?email=${action.email}&password=${action.password}`, {
 		method: 'GET',
 		headers: myHeaders
 	}).then((response) => {
@@ -30,7 +31,13 @@ export function* getUser(action) {
 		console.log(data);
 		return data;
 	}).catch(err => {
-		answer = `There was an error ${err}`;
+
 	});
-	yield put(LoginActions.getUser(data));
+
+	if(data !== undefined) {
+		yield put(LoginActions.getUser(data));
+		yield put(LoginActions.handleErrors('Login Successful'));	
+	} else {
+		yield put(LoginActions.handleErrors('User Not Found'));
+	}
 }
