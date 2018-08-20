@@ -1,0 +1,3 @@
+export default {
+	HANDLE_GET_PATIENTS: 'HANDLE_GET_PATIENTS',
+};
