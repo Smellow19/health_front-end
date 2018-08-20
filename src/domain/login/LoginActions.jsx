@@ -1,0 +1,33 @@
+import LoginConstants from './LoginConstants';
+
+//Updates state to the user's inputted email and password.
+export const handleLogin = (name, value) => {
+	return {
+		type: LoginConstants.HANDLE_LOGIN,
+		name: name,
+		value: value
+	};
+};
+//Takes email and password from state and passes it into the fetch call.
+export const getUserSaga = (email, password) => {
+	console.log("Action Run");
+	return {
+		type: LoginConstants.HANDLE_GET_USER_SAGA,
+		email: email,
+		password: password 
+	};
+};
+//Upon successful fetch, This sets the User inside of the store.
+export const getUser = (user) => {
+	return {
+		type: LoginConstants.HANDLE_GET_USER,
+		user: user
+	};
+};
+
+export const handleErrors = (error) => {
+	return {
+		type: LoginConstants.HANDLE_ERROR,
+		error: error
+	};
+};
