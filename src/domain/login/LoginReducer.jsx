@@ -5,6 +5,7 @@ const initState = {
 	error: '',
 	email: 'werickson@superhealth.com',
 	password: 'password',
+	isLoggedIn: false,
 };
 
 const LoginReducer = (state = initState, action) => {
@@ -29,6 +30,13 @@ const LoginReducer = (state = initState, action) => {
 			return {
 				...state,
 				user: action.user,
+			};
+		}
+
+		case LoginConstants.HANDLE_IS_LOGGED_IN: {
+			return {
+				...state,
+				isLoggedIn: action.bool,
 			};
 		}
 

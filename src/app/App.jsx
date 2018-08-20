@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Login from '../domain/login/Login';
 import Navigation from '../domain/navigation/Navigation';
+import Content from './content';
 
 class App extends Component {
 	render() {
 		return (
 			<div className="App">
 				<Navigation />
-				<Login />
+				<Content />
 			</div>
 		);
 	}

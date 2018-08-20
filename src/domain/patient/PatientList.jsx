@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 
 class PatientList extends React.Component {
 	constructor(props) {
@@ -12,7 +15,14 @@ class PatientList extends React.Component {
 
 		return (
 			<div>
+				<h1> Patient List </h1>
 
+
+
+
+
+				{this.props.login.isLoggedIn === false &&
+					< Redirect to={'/'} />}
 			</div>
 
 
@@ -23,4 +33,8 @@ class PatientList extends React.Component {
 
 
 
-export default PatientList;
+export default connect((state) => {
+	return {
+		login: state.login
+	};
+})(PatientList);

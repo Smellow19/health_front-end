@@ -35,9 +35,13 @@ export function* getUserSaga(action) {
 	});
 
 	if(data !== undefined) {
+		let bool = true;
 		yield put(LoginActions.getUser(data));
-		yield put(LoginActions.handleErrors('Login Successful'));	
+		yield put(LoginActions.handleErrors('Login Successful'));
+		yield put(LoginActions.handleIsLoggedIn(bool));
 	} else {
+		let bool = false;
+		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors('User Not Found'));
 	}
 }

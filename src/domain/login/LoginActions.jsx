@@ -25,6 +25,13 @@ export const getUser = (user) => {
 	};
 };
 
+export const handleIsLoggedIn = (bool) => {
+	return {
+		type: LoginConstants.HANDLE_IS_LOGGED_IN,
+		bool: bool,
+	};
+};
+
 export const handleErrors = (error) => {
 	return {
 		type: LoginConstants.HANDLE_ERROR,

@@ -48,6 +48,8 @@ class Login extends React.Component {
 
 				<a href= '/' > Register </a>
 
+				{this.props.login.isLoggedIn &&
+					< Redirect to={'/patients'} />}
 			</div>
 
 		
