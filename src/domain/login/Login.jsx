@@ -35,7 +35,8 @@ class Login extends React.Component {
 	}
 
 	render() {
-		
+		if(this.props.login.user != undefined) {
+		}
 		return (
 			<div style={container} >
 				<h1> Login </h1>

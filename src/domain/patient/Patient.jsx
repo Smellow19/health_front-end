@@ -1,4 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+
+const patientContainer = {
+	display: 'inline-block',
+	width: '33%', 
+	border: 'solid 1px black',
+	margin: 'auto'
+
+};
 
 class Patient extends React.Component {
 	constructor(props) {
@@ -9,10 +19,26 @@ class Patient extends React.Component {
 
 
 	render() {
-
+		let patientsHtml;
+		if(this.props.patient.patients === undefined) {
+			patientsHtml = <p> error</p>
+		}
+		else {
+			patientsHtml = this.props.patient.patients.map((patient, key ) => {
+				return (
+					<div key= {key} style= {patientContainer}>
+						<p> Name: {patient.firstname} {patient.lastname} </p>
+						<p> Age: {patient.age} </p>
+						<p> Gender: {patient.gender} </p>
+					</div>
+				);
+			});
+			
+			
+		}
 		return (
 			<div>
-
+				{patientsHtml}
 			</div>
 
 
@@ -23,4 +49,9 @@ class Patient extends React.Component {
 
 
 
-export default Patient;
+export default connect((state) => {
+	return {
+		patient: state.patients,
+		login: state.login
+	};
+})(Patient);

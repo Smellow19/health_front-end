@@ -31,6 +31,12 @@ export const handleIsLoggedIn = (bool) => {
 	};
 };
 
+export const handleIsLoggedOut = () => {
+	return {
+		type: LoginConstants.HANDLE_IS_LOGGED_OUT,
+	};
+};
+
 export const handleErrors = (error) => {
 	return {
 		type: LoginConstants.HANDLE_ERROR,

@@ -26,7 +26,7 @@ class Navigation extends React.Component {
 
 	handleLogout() {
 		let bool = false;
-		this.props.dispatch(LoginActions.handleIsLoggedIn(bool));
+		this.props.dispatch(LoginActions.handleIsLoggedOut());
 	}
 
 
