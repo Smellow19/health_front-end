@@ -29,9 +29,7 @@ class Login extends React.Component {
 
 	//Calls the get user saga to fetch the user matching the email and password
 	handleSubmit() {
-		console.log(this.props.login.email);
 		this.props.dispatch(LoginActions.getUserSaga(this.props.login.email, this.props.login.password));
-		console.log(this.props.login.user);
 	}
 
 	render() {

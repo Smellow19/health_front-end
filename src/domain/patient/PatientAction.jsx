@@ -17,3 +17,27 @@ export const handleGetPatients = (patientList) => {
 	};
 };
 
+export const handleCreatePatient = (name, value) => {
+	return {
+		type: PatientConstant.HANDLE_CREATE_PATIENTS,
+		name: name,
+		value: value,
+	};
+};
+
+export const handleCreatePatientAddress = (name, value) => {
+	return {
+		type: PatientConstant.HANDLE_CREATE_PATIENTS_ADDRESS,
+		name: name,
+		value: value,
+	};
+};
+
+export const handleCreatePatientSaga = (patient) => {
+	return {
+		type: PatientConstant.HANDLE_CREATE_PATIENTS_SAGA,
+		patient: patient,
+	};
+};
+
+

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import Patients from './Patient';
 
@@ -21,11 +22,12 @@ class PatientList extends React.Component {
 		this.props.dispatch(patientActions.handleGetPatientsSaga());
 	}
 	render() {
-		console.log(this.props.patient)
 
 		return (
 			<div>
-				<h1> Patient List </h1> <button type = "submit">Create Patient</button>
+				<h1> Patient List </h1> 
+				
+				<Link to= "/create_patient"><button type = "submit">Create Patient</button> </Link>
 
 
 				<Patients />
