@@ -1,7 +1,9 @@
 import LoginConstants from './LoginConstants';
 
 const initState = {
-	user: {},
+	user: {
+		roles: ['user', 'user']
+	},
 	error: '',
 	email: 'werickson@superhealth.com',
 	password: 'password',
@@ -48,7 +50,7 @@ const LoginReducer = (state = initState, action) => {
 				email: '',
 				password: '',
 				isLoggedIn: false,
-			}
+			};
 		}
 
 		case LoginConstants.HANDLE_ERROR: {

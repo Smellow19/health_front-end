@@ -22,12 +22,21 @@ class PatientList extends React.Component {
 		this.props.dispatch(patientActions.handleGetPatientsSaga());
 	}
 	render() {
+		let createHTML;
+
+		if (this.props.login.user.roles[1] != "ADMIN") {
+			createHTML = null;
+		}
+		else {
+			createHTML =
+				<Link to="/create_patient"><button type="submit">Create Patient</button> </Link>;
+		}
 
 		return (
 			<div>
 				<h1> Patient List </h1> 
 				
-				<Link to= "/create_patient"><button type = "submit">Create Patient</button> </Link>
+				{createHTML}
 
 
 				<Patients />
