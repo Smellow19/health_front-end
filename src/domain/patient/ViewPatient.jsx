@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
+import Encounters from './Encounters';
 
 const createPatient = {
 	textAlign: 'left',
@@ -64,6 +65,9 @@ class ViewPatient extends React.Component {
 		}else {
 			viewhtml= 
 			<div>
+				{editButton}
+				<Link to="/"><button type="Submit">Return</button></Link>
+				{deleteButton}
 				<p> Name: {patient.firstname} {patient.lastname} </p>
 				<p> Social Security Number: {patient.ssn} </p>
 				<p> Age: {patient.age} </p>
@@ -76,9 +80,7 @@ class ViewPatient extends React.Component {
 					{patient.address.postal} 
 				</p>
 				<p> Office Visits: {this.props.patient.encounters.length} </p>
-				{editButton}
-				<Link to="/"><button type="Submit">Return</button></Link>
-				{deleteButton}
+				<Encounters />
 				
 				
 			</div>;
