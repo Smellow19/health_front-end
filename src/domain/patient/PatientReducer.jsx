@@ -59,7 +59,6 @@ const PatientReducer = (state = initState, action) => {
 		}
 
 		case PatientConstants.HANDLE_CREATE_PATIENTS_ADDRESS: {
-			console.log('Address reducer')
 			return {
 				...state,
 				createPatient: {

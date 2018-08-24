@@ -45,7 +45,9 @@ const LoginReducer = (state = initState, action) => {
 		case LoginConstants.HANDLE_IS_LOGGED_OUT: {
 			return {
 				...state,
-				user: {},
+				user: {
+					roles: ['user', 'user']
+				},
 				error: 'Successfully Logged out',
 				email: '',
 				password: '',

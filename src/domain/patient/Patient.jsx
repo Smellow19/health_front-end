@@ -23,8 +23,8 @@ class Patient extends React.Component {
 
 
 	handleViewPatient(e) {
-		this.props.dispatch(patientActions.handleGetSinglePatientSaga(e.target.value))
-		this.props.dispatch(patientActions.handleViewRedirect(true));
+		this.props.dispatch(patientActions.handleGetSinglePatientSaga(e.target.value));
+		this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(e.target.name));
 	}
 
 	componentWillUnmount() {
@@ -44,7 +44,7 @@ class Patient extends React.Component {
 						<p> Name: {patient.firstname} {patient.lastname} </p>
 						<p> Age: {patient.age} </p>
 						<p> Gender: {patient.gender} </p>
-						<button value={patient.ssn} onClick={this.handleViewPatient}> View </button>
+						<Link to="view_patient"><button name={patient.id} value={patient.ssn} onClick={this.handleViewPatient}> View </button></Link>
 					</div>
 				);
 			});

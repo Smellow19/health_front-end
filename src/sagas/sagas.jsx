@@ -12,6 +12,8 @@ export function* WatchAll() {
 		takeEvery(PatientConstants.HANDLE_CREATE_PATIENTS_SAGA, CreateNewPatientsSaga),
 		takeEvery(PatientConstants.HANDLE_GET_SINGLE_PATIENT_SAGA, getPatientSaga), //Single Patient
 		takeEvery(PatientConstants.HANDLE_EDIT_SINGLE_PATIENT_SAGA, updatePatientSaga),
+		takeEvery(PatientConstants.HANDLE_GET_SINGLE_PATIENT_ENCOUNTERS_SAGA, getPatientEncountersSaga),
+		takeEvery(PatientConstants.HANDLE_DELETE_SINGLE_PATIENT_SAGA, DeletePatientSaga),
 
 
 	];
@@ -91,7 +93,6 @@ export function* getPatientSaga(action) {
 		method: 'GET',
 		headers: myHeaders
 	}).then((response) => {
-		console.log(response);
 		if (!response.ok) {
 			throw response;
 		}
@@ -114,7 +115,6 @@ export function* getPatientSaga(action) {
 }
 
 export function* updatePatientSaga(action) {
-	console.log("update saga");
 	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -126,7 +126,6 @@ export function* updatePatientSaga(action) {
 		body: JSON.stringify(action.patient) 
 
 	}).then((response) => {
-		console.log(response);
 		if (!response.ok) {
 			throw response;
 		}
@@ -134,18 +133,14 @@ export function* updatePatientSaga(action) {
 	}).then((data) => {
 		return data;
 	}).catch(err => {
-		console.log(err);
 		return err;
 	});
 
 	if (data.status == 400 || data.status == 500) {
-		console.log("Fail1");
 		yield put(LoginActions.handleErrors('Invalid user input.'));
 	} else if (data.status == 404) {
-		console.log("Fail2");
 		yield put(LoginActions.handleErrors('User Not found.'));
 	} else {
-		console.log("Pass");
 		yield put(PatientActions.handleEditRedirect(true));
 		yield put(PatientActions.handleUpdateSinglePatientInfo(action.patient));
 	}
@@ -157,11 +152,10 @@ export function* getPatientEncountersSaga(action) {
 		'Content-Type': 'application/json',
 		'mode': 'cors'
 	});
-	let data = yield fetch(`http://localhost:8080/patients/find_patient_encounters?id=${action.id}`, {
+	let data = yield fetch(`http://localhost:8080/encounter/find_encounter?patientid=${action.patientId}`, {
 		method: 'GET',
 		headers: myHeaders
 	}).then((response) => {
-		console.log(response);
 		if (!response.ok) {
 			throw response;
 		}
@@ -169,19 +163,12 @@ export function* getPatientEncountersSaga(action) {
 	}).then((data) => {
 		return data;
 	}).catch(err => {
-
+		return err;
 	});
-
-	if (data !== undefined) {
-		yield put(PatientActions.handleGetSinglePatientEncounters(data));
-		yield put(LoginActions.handleErrors(''));
-	} else {
-		let bool = false;
-		yield put(LoginActions.handleErrors(
-			'There were issues connecting to the database, please check your connection and try again.'
-		));
-	}
+	yield put(PatientActions.handleGetSinglePatientEncounters(data));
+	yield put(LoginActions.handleErrors(''));
 }
+
 
 export function* CreateNewPatientsSaga(action) {
 	let answer = '';
@@ -214,15 +201,17 @@ export function* CreateNewPatientsSaga(action) {
 }
 
 export function* DeletePatientSaga(action) {
+	console.log('delete saga')
 	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
 	});
-	let data = yield fetch(`http://localhost:8080/find_encounter?patientid=${action.ssn}`, {
+	let data = yield fetch(`http://localhost:8080/patients/delete_patient?ssn=${action.ssn}&encounters=${action.encounters}`, {
 		method: 'DELETE',
 		headers: myHeaders,
 	}).then((response) => {
+		console.log(response)
 		if (!response.ok) {
 			throw response;
 		}
@@ -233,11 +222,11 @@ export function* DeletePatientSaga(action) {
 		return err;
 	});
 
-	if (data.status == 409) {
-		yield put(LoginActions.handleErrors('There is already a user with this information'));
-	} else if (data.status == 400 || data.status == 500) {
-		yield put(LoginActions.handleErrors('Invalid user input.'));
-	} else {
-		yield put(PatientActions.handleCreateRedirect(true));
+	if (data.status == 202) {
+		yield put(LoginActions.handleErrors(''));
+		yield put(PatientActions.handleViewRedirect(true));
+
+	} else if (data.status == 400 || data.status == 500 || 409) {
+		yield put(LoginActions.handleErrors('Can not delete patients with encounters.'));
 	}
 }

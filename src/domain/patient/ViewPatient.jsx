@@ -18,12 +18,17 @@ class ViewPatient extends React.Component {
 	}
 
 	handleDeletePatient() {
+		this.props.dispatch(patientActions.handleDeletePatient(this.props.patient.patient.ssn, this.props.patient.encounters.length));
 
 	}
 	
 	handleRedirect() {
 		this.props.dispatch(patientActions.handleViewRedirect(true));
 	}
+
+	// componentWillMount() {
+	// 	this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(this.props.patient.patient.id))
+	// }
 
 	componentWillUnmount() {
 		this.props.dispatch(LoginActions.handleErrors(''));
@@ -44,7 +49,7 @@ class ViewPatient extends React.Component {
 		}
 		else {
 			deleteButton =
-				<button type="Submit">Delete Patient</button>;
+				<button type="Submit" onClick={this.handleDeletePatient}>Delete Patient</button>;
 		}
 
 		if (this.props.login.user.roles[1] != "ADMIN") {
@@ -71,6 +76,7 @@ class ViewPatient extends React.Component {
 					{patient.address.city}, {patient.address.state}<br/> 
 					{patient.address.postal} 
 				</p>
+				<p> Office Visits: {this.props.patient.encounters.length} </p>
 				{editButton}
 				<Link to="/"><button type="Submit">Return</button></Link>
 				{deleteButton}
@@ -83,10 +89,14 @@ class ViewPatient extends React.Component {
 
 		return (
 			<div>
+
+				<h1>{this.props.login.error}</h1>
 				{viewhtml}
 
 
 				{(this.props.login.isLoggedIn === false || this.props.login.user.roles[1] == undefined) &&
+					< Redirect to={'/'} />}
+				{this.props.patient.viewredirect &&
 					< Redirect to={'/'} />}
 			</div>
 

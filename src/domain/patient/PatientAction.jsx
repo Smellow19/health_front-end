@@ -19,7 +19,6 @@ export const handleGetPatients = (patientList) => {
 
 //sets each key and value when creating a patient
 export const handleCreatePatient = (name, value) => {
-	console.log('Action running');
 	return {
 		type: PatientConstant.HANDLE_CREATE_PATIENTS,
 		name: name,
@@ -79,7 +78,6 @@ export const handleGetSinglePatient = (patient) => {
 };
 //Passes data from the edited patient to the saga 
 export const handleEditSinglePatientSaga = (ssn, patient) => {
-	console.log("update action");
 	return {
 		type: PatientConstant.HANDLE_EDIT_SINGLE_PATIENT_SAGA,
 		ssn: ssn,
@@ -112,6 +110,15 @@ export const handleUpdateSinglePatientInfo = (patient) => {
 	};
 };
 
+//Handles deleting a patient from the database
+export const handleDeletePatient = (ssn, encounters) => {
+	console.log(ssn)
+	return {
+		type: PatientConstant.HANDLE_DELETE_SINGLE_PATIENT_SAGA,
+		ssn: ssn,
+		encounters: encounters
+	};
+};
 
 //handles the redirect from the create_patient page
 export const handleCreateRedirect = (bool) => {
