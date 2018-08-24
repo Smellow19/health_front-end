@@ -29,13 +29,15 @@ class Login extends React.Component {
 
 	//Calls the get user saga to fetch the user matching the email and password
 	handleSubmit() {
-		console.log(this.props.login.email);
 		this.props.dispatch(LoginActions.getUserSaga(this.props.login.email, this.props.login.password));
-		console.log(this.props.login.user);
+	}
+
+	componentWillUnmount() {
 	}
 
 	render() {
-		
+		if(this.props.login.user != undefined) {
+		}
 		return (
 			<div style={container} >
 				<h1> Login </h1>
@@ -48,6 +50,8 @@ class Login extends React.Component {
 
 				<a href= '/' > Register </a>
 
+				{this.props.login.isLoggedIn &&
+					< Redirect to={'/patients'} />}
 			</div>
 
 		

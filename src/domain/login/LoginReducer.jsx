@@ -1,10 +1,13 @@
 import LoginConstants from './LoginConstants';
 
 const initState = {
-	user: {},
+	user: {
+		roles: ['user', 'user']
+	},
 	error: '',
 	email: 'werickson@superhealth.com',
 	password: 'password',
+	isLoggedIn: false,
 };
 
 const LoginReducer = (state = initState, action) => {
@@ -32,8 +35,27 @@ const LoginReducer = (state = initState, action) => {
 			};
 		}
 
+		case LoginConstants.HANDLE_IS_LOGGED_IN: {
+			return {
+				...state,
+				isLoggedIn: action.bool,
+			};
+		}
+
+		case LoginConstants.HANDLE_IS_LOGGED_OUT: {
+			return {
+				...state,
+				user: {
+					roles: ['user', 'user']
+				},
+				error: 'Successfully Logged out',
+				email: '',
+				password: '',
+				isLoggedIn: false,
+			};
+		}
+
 		case LoginConstants.HANDLE_ERROR: {
-			console.log('Reducer has been run');
 			return {
 				...state,
 				error: action.error,
