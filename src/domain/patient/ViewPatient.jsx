@@ -31,7 +31,6 @@ class ViewPatient extends React.Component {
 	// }
 
 	componentWillUnmount() {
-		this.props.dispatch(LoginActions.handleErrors(''));
 		this.props.dispatch(patientActions.handleViewRedirect(false));
 
 	}

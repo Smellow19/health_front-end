@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
+import * as LoginActions from '../login/LoginActions';
 import Patients from './Patient';
 
 
@@ -21,6 +22,11 @@ class PatientList extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(patientActions.handleGetPatientsSaga());
 	}
+
+	componentWillUnmount() {
+		this.props.dispatch(LoginActions.handleErrors(''));
+	}
+
 	render() {
 		let createHTML;
 
@@ -35,6 +41,7 @@ class PatientList extends React.Component {
 		return (
 			<div>
 				<h1> Patient List </h1> 
+				<p>{this.props.login.error}</p>
 				
 				{createHTML}
 

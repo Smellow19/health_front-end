@@ -32,6 +32,9 @@ class Login extends React.Component {
 		this.props.dispatch(LoginActions.getUserSaga(this.props.login.email, this.props.login.password));
 	}
 
+	componentWillUnmount() {
+	}
+
 	render() {
 		if(this.props.login.user != undefined) {
 		}

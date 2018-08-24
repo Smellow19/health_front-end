@@ -44,6 +44,7 @@ export function* getUserSaga(action) {
 		yield put(LoginActions.getUser(data));
 		yield put(LoginActions.handleErrors('Login Successful'));
 		yield put(LoginActions.handleIsLoggedIn(bool));
+		yield put(LoginActions.handleErrors(''));
 	} else {
 		let bool = false;
 		yield put(LoginActions.handleIsLoggedIn(bool));
@@ -74,7 +75,6 @@ export function* getPatientsSaga(action) {
 
 	if (data !== undefined) {
 		yield put(PatientActions.handleGetPatients(data));
-		yield put(LoginActions.handleErrors(''));
 	} else {
 		let bool = false;
 		yield put(LoginActions.handleErrors(
@@ -105,7 +105,6 @@ export function* getPatientSaga(action) {
 
 	if (data !== undefined) {
 		yield put(PatientActions.handleGetSinglePatient(data));
-		yield put(LoginActions.handleErrors(''));
 	} else {
 		let bool = false;
 		yield put(LoginActions.handleErrors(
@@ -200,6 +199,8 @@ export function* CreateNewPatientsSaga(action) {
 	}
 }
 
+
+
 export function* DeletePatientSaga(action) {
 	console.log('delete saga')
 	let answer = '';
@@ -211,7 +212,7 @@ export function* DeletePatientSaga(action) {
 		method: 'DELETE',
 		headers: myHeaders,
 	}).then((response) => {
-		console.log(response)
+		console.log(response);
 		if (!response.ok) {
 			throw response;
 		}
@@ -219,14 +220,20 @@ export function* DeletePatientSaga(action) {
 	}).then((data) => {
 		return data;
 	}).catch(err => {
+		console.log(err + "Err")
 		return err;
 	});
 
-	if (data.status == 202) {
-		yield put(LoginActions.handleErrors(''));
-		yield put(PatientActions.handleViewRedirect(true));
-
-	} else if (data.status == 400 || data.status == 500 || 409) {
+	if (data.status == 409) {
+		console.log(data);
+		console.log(data.status);
+		console.log("fail");
 		yield put(LoginActions.handleErrors('Can not delete patients with encounters.'));
+
+	} else {
+		console.log("Pass");
+		yield put(LoginActions.handleErrors('Patient deleted'));
+		yield put(PatientActions.handleViewRedirect(true));
 	}
 }
+
