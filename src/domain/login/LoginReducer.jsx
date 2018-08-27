@@ -62,6 +62,10 @@ const LoginReducer = (state = initState, action) => {
 			};
 		}
 
+		default: {
+			1 + 2;
+		}
+
 	}
 
 

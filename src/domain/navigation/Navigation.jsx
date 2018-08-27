@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import * as LoginActions from '../login/LoginActions';
 
 
@@ -31,7 +29,6 @@ class Navigation extends React.Component {
 	}
 
 	handleLogout() {
-		let bool = false;
 		this.props.dispatch(LoginActions.handleIsLoggedOut());
 	}
 

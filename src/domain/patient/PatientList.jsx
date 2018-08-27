@@ -7,9 +7,7 @@ import * as LoginActions from '../login/LoginActions';
 import Patients from './Patient';
 
 
-const createPatient = {
-	textAlign: 'left',
-};
+
 
 const PatientListContainer = {
 	width: '80%',
