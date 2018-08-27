@@ -166,6 +166,8 @@ export function* getPatientEncountersSaga(action) {
 	});
 	yield put(PatientActions.handleGetSinglePatientEncounters(data));
 	yield put(LoginActions.handleErrors(''));
+	yield put(PatientActions.handleViewRedirect(true));
+
 }
 
 
@@ -233,7 +235,7 @@ export function* DeletePatientSaga(action) {
 	} else {
 		console.log("Pass");
 		yield put(LoginActions.handleErrors('Patient deleted'));
-		yield put(PatientActions.handleViewRedirect(true));
+		yield put(PatientActions.handleHomeRedirect(true));
 	}
 }
 

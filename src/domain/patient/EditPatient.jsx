@@ -9,6 +9,38 @@ const createPatient = {
 	textAlign: 'left',
 };
 
+const editPatientContainer = {
+	margin: 'auto',
+	width: '75%',
+	flexDirection: 'row',
+
+};
+
+const editpatient = {
+	backgroundColor: 'white',
+	textAlign: 'left',
+	width: '60%',
+	margin: 'auto',
+	paddingLeft: '250px',
+	paddingTop: '35px',
+	paddingBottom: '35px',
+};
+
+const patientInput = {
+	width: '45%',
+	borderRadius: '3px',
+	marginTop: '5px',
+	marginBottom: '5px'
+
+};
+
+const buttonStyle = {
+	width: '80px',
+	marginLeft: '50px',
+	marginTop: '20px',
+};
+
+
 class EditPatient extends React.Component {
 	constructor(props) {
 		super(props);
@@ -41,6 +73,8 @@ class EditPatient extends React.Component {
 
 	componentWillUnmount() {
 		this.props.dispatch(LoginActions.handleErrors(''));
+		this.props.dispatch(patientActions.handleHomeRedirect(false));
+		this.props.dispatch(patientActions.handleViewRedirect(false));
 		this.props.dispatch(patientActions.handleEditRedirect(false));
 		this.props.dispatch(patientActions.handleUpdateSinglePatientInfo(this.props.patient.updatePatient));
 
@@ -48,45 +82,50 @@ class EditPatient extends React.Component {
 	}
 
 	render() {
+		// let editPatientHtml;
+
+		// if (this.props.patient.patient === undefined) {
+		// 	editPatientHtml = <h1>There was an issue connecting to the database, please check your connection and try again. </h1>;
+		// }
+		// else {
+			
+
+		// }
 		return (
 			<div>
-				<h1>{this.props.login.error}</h1>
 
-				<div>
-					<ul>
-						<li> SSN must be in the following format: <br /> xxx-xx-xxxx </li>
-						<li> Age, Height, Weight must be valid numbers:<br /> 0 - 999, max length of 3</li>
-						<li> Postal code must be valid numbers: <br /> 12345 Max length 6</li>
-						<li> No fields can be empty </li>
-						<li> State must be abbreviated <br /> CA </li>
-					</ul>
-				</div>
+				<div style={editPatientContainer}>
 
-				<div>
-					<input type="text" name="firstname" defaultValue={this.props.patient.updatePatient.firstname} placeholder="First Name" onChange={this.handlePatientInfoChange} />
-					<input type="text" name="lastname" defaultValue={this.props.patient.updatePatient.lastname} placeholder="Last Name" onChange={this.handlePatientInfoChange} />
-					<input type="text" name="ssn" defaultValue={this.props.patient.updatePatient.ssn} placeholder="SSN" onChange={this.handlePatientInfoChange} />
-					<input type="text" name="age" defaultValue={this.props.patient.updatePatient.age} maxLength="3" placeholder="Age" onChange={this.handlePatientInfoChange} />
-					<select name="gender" defaultValue={this.props.patient.updatePatient.gender} onChange={this.handlePatientInfoChange}>
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
-					</select>
-					<input type="text" name="height" defaultValue={this.props.patient.updatePatient.height} maxLength="3" placeholder="Height(Inches)" onChange={this.handlePatientInfoChange} />
-					<input type="text" name="weight" defaultValue={this.props.patient.updatePatient.weight} maxLength="3" placeholder="Weight(LBS)" onChange={this.handlePatientInfoChange} />
-					<input type="text" name="insurance" defaultValue={this.props.patient.updatePatient.insurance} placeholder="Insurance" onChange={this.handlePatientInfoChange} />
-					<br /> <br />
-					<p>Address</p>
-					<input type="text" name="street" defaultValue={this.props.patient.updatePatient.address.street} placeholder="Street" onChange={this.handleAddressChange} />
-					<input type="text" name="city" defaultValue={this.props.patient.updatePatient.address.city} placeholder="City" onChange={this.handleAddressChange} />
-					<input type="text" name="state" defaultValue={this.props.patient.updatePatient.address.state} placeholder="State" onChange={this.handleAddressChange} />
-					<input type="text" name="postal" defaultValue={this.props.patient.updatePatient.address.postal} maxLength="6" placeholder="Postal" onChange={this.handleAddressChange} />
+					<div style={editpatient}>
+						<h1 id="top" > Edit Patient Details </h1>
+						<h2>{this.props.login.error}</h2>
 
-				</div>
+						First Name:<br /><input type="text" name="firstname" style={patientInput} defaultValue={this.props.patient.updatePatient.firstname} placeholder="First Name" onChange={this.handlePatientInfoChange} /><br />
+						Last Name:<br /><input type="text" name="lastname" style={patientInput} defaultValue={this.props.patient.updatePatient.lastname} placeholder="Last Name" onChange={this.handlePatientInfoChange} /><br />
+						Social Security Number: (SSN must be in the following format: xxx-xx-xxxx) <br /><input type="text" name="ssn" style={patientInput} defaultValue={this.props.patient.updatePatient.ssn} placeholder="SSN" onChange={this.handlePatientInfoChange} /><br />
+						Age:(must be valid numbers)<br /><input type="text" name="age" style={patientInput} defaultValue={this.props.patient.updatePatient.age} maxLength="3" placeholder="Age" onChange={this.handlePatientInfoChange} /><br />
+						Gender: <br /><select name="gender" defaultValue={this.props.patient.updatePatient.gender} onChange={this.handlePatientInfoChange}>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select><br/>
+						Height: (must be valid numbers) <br /><input type="text" name="height" style={patientInput} defaultValue={this.props.patient.updatePatient.height} maxLength="3" placeholder="Height(Inches)" onChange={this.handlePatientInfoChange} /><br />
+						Weight: (must be valid numbers) <br /><input type="text" name="weight" style={patientInput} defaultValue={this.props.patient.updatePatient.weight} maxLength="3" placeholder="Weight(LBS)" onChange={this.handlePatientInfoChange} /><br />
+						Insurance Provider:<br /><input type="text" name="insurance" style={patientInput} defaultValue={this.props.patient.updatePatient.insurance} placeholder="Insurance" onChange={this.handlePatientInfoChange} /><br />
+						<br />
+						<p>Address</p>
+						Street:<br /><input type="text" name="street" style={patientInput} defaultValue={this.props.patient.updatePatient.address.street} placeholder="Street" onChange={this.handleAddressChange} /><br />
+						City:<br /><input type="text" name="city" style={patientInput} defaultValue={this.props.patient.updatePatient.address.city} placeholder="City" onChange={this.handleAddressChange} /><br />
+						State: (State must be abbreviated)<br /><input type="text" name="state" style={patientInput} defaultValue={this.props.patient.updatePatient.address.state} placeholder="State" onChange={this.handleAddressChange} /><br />
+						Post Code: (Postal code must be valid 5 number input)<br /><input type="text" name="postal" style={patientInput} defaultValue={this.props.patient.updatePatient.address.postal} maxLength="6" placeholder="Postal" onChange={this.handleAddressChange} /><br />
 
-				<button type="submit" onClick={this.handleEditPatientSubmit}>Submit</button>
-				<Link to="view_patient"><button type="submit">Cancel</button></Link>
-
-				{(this.props.login.isLoggedIn === false || this.props.login.user.roles[1] == undefined) &&
+						<button type="submit" onClick={this.handleEditPatientSubmit}><a href="#top">Submit</a> </button>
+						<Link to="view_patient"><button type="submit">Cancel</button></Link>
+					</div>
+				</div>;
+	
+				{this.props.login.isLoggedIn === false &&
+					< Redirect to={'/'} />}
+				{this.props.login.user.roles[1] == undefined &&
 					< Redirect to={'/'} />}
 
 				{this.props.patient.editredirect &&

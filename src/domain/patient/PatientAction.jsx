@@ -144,3 +144,11 @@ export const handleViewRedirect = (bool) => {
 	};
 };
 
+export const handleHomeRedirect = (bool) => {
+	return {
+		type: PatientConstant.HANDLE_HOME_REDIRECT,
+		bool: bool,
+	};
+};
+
+

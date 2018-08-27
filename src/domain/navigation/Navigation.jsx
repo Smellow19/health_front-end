@@ -5,15 +5,21 @@ import { Link } from 'react-router-dom';
 import * as LoginActions from '../login/LoginActions';
 
 
-const ulLinks = {
-	display: 'inline',
-}
+const navContainer = {
+	height: '40px',
+	width: '97%',
+	margin: 'none',
+	backgroundColor: '#D5D5D5',
+	textAlign: 'right',
+	marginRight: '20px',
+	marginTop: '30px',
+};
 
 const linkStyle = {
 	listStyle: 'none',
-	display: 'inline-block',
 	marginLeft: '5px',
 	marginRight: '5px',
+	marginTop: '20px'
 };
 
 
@@ -37,19 +43,13 @@ class Navigation extends React.Component {
 		}
 		else {
 			logout =
-				<li onClick={this.handleLogout} style={linkStyle}> Logout</li>
+				<a id="logout" href='/' onClick={this.handleLogout} style={linkStyle}> Logout</a>;
 		}
 		
 
 		return (
-			<div style = {ulLinks}>
-				<h1> Navbar </h1>
-
-				<ul>
-					<li style = {linkStyle}> Link </li>
-					<li style = {linkStyle}> Link</li>
-					{logout}
-				</ul>
+			<div style={navContainer}>
+				{logout}
 
 			</div>
 

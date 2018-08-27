@@ -9,10 +9,12 @@ import { Redirect } from 'react-router-dom';
 
 const encounterContainer = {
 	display: 'inline-block',
-	width: '50%',
+	width: '100%',
 	border: 'solid 1px black',
 	textAlign: 'left',
 	margin: '10px',
+	backgroundColor: 'white',
+	padding: '5px'
 
 };
 
@@ -32,12 +34,12 @@ class Encounters extends React.Component {
 				return (
 					<div key={key} style={encounterContainer}>
 						<p> Doctor Name: {encounter.provider} </p>
-						<p> Reason for visit: {encounter.chiefComplaint} </p>
-						<p> Doctor Name: {encounter.provider} </p>
+						<p> Reason for visit: {encounter.chiefcomplaint} </p>
 						<p> Pulse: {encounter.pulse} </p>
 						<p> Systolic: {encounter.systolic} </p>
 						<p> Diastolic: {encounter.diastolic} </p>
-						<p> Notes: <br /> <hr /> {encounter.notes} </p>
+						<h2> Notes</h2> <hr />
+						<br /><p>{encounter.notes} </p>
 						
 					</div>
 				);

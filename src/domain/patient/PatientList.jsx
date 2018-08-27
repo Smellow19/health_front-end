@@ -11,6 +11,12 @@ const createPatient = {
 	textAlign: 'left',
 };
 
+const PatientListContainer = {
+	width: '80%',
+	margin: 'auto',
+	textAlign: 'center',
+}
+
 class PatientList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,6 +31,9 @@ class PatientList extends React.Component {
 
 	componentWillUnmount() {
 		this.props.dispatch(LoginActions.handleErrors(''));
+		this.props.dispatch(patientActions.handleHomeRedirect(false));
+		this.props.dispatch(patientActions.handleViewRedirect(false));
+		this.props.dispatch(patientActions.handleEditRedirect(false));
 	}
 
 	render() {
@@ -39,7 +48,7 @@ class PatientList extends React.Component {
 		}
 
 		return (
-			<div>
+			<div style={PatientListContainer}>
 				<h1> Patient List </h1> 
 				<p>{this.props.login.error}</p>
 				

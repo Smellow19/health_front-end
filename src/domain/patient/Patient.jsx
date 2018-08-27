@@ -9,9 +9,12 @@ import { Redirect } from 'react-router-dom';
 
 const patientContainer = {
 	display: 'inline-block',
-	width: '33%', 
+	width: '30%', 
 	border: 'solid 1px black',
-	margin: 'auto'
+	margin: '5px',
+	backgroundColor: 'white'
+	//backgroundColor: '#96858F'
+	// backgroundColor: '#6D7993'
 
 };
 
@@ -25,6 +28,7 @@ class Patient extends React.Component {
 	handleViewPatient(e) {
 		this.props.dispatch(patientActions.handleGetSinglePatientSaga(e.target.value));
 		this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(e.target.name));
+
 	}
 
 	componentWillUnmount() {
@@ -44,7 +48,7 @@ class Patient extends React.Component {
 						<p> Name: {patient.firstname} {patient.lastname} </p>
 						<p> Age: {patient.age} </p>
 						<p> Gender: {patient.gender} </p>
-						<Link to="view_patient"><button name={patient.id} value={patient.ssn} onClick={this.handleViewPatient}> View </button></Link>
+						<button name={patient.id} value={patient.ssn} onClick={this.handleViewPatient}> View </button>
 					</div>
 				);
 			});
