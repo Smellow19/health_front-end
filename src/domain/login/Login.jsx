@@ -26,10 +26,7 @@ const input = {
 
 };
 
-Login.propTypes = {
-	login: PropTypes.object,
-	dispatch: PropTypes.function,
-};
+
 
 class Login extends React.Component {
 	constructor(props) {
@@ -74,6 +71,10 @@ class Login extends React.Component {
 	}
 }
 
+Login.propTypes = {
+	login: PropTypes.object,
+	dispatch: PropTypes.function,
+};
 
 export default connect((state) => {
 	return {

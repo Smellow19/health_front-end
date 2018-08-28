@@ -7,12 +7,7 @@ import * as LoginActions from '../login/LoginActions';
 import Patients from './Patient';
 import PropTypes from 'prop-types';
 
-PatientList.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+
 
 
 
@@ -79,7 +74,12 @@ class PatientList extends React.Component {
 	}
 }
 
-
+PatientList.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {

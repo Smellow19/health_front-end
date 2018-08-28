@@ -6,12 +6,7 @@ import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
 import PropTypes from 'prop-types';
 
-EditPatient.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+
 
 const editPatientContainer = {
 	margin: 'auto',
@@ -137,7 +132,12 @@ class EditPatient extends React.Component {
 	}
 }
 
-
+EditPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {

@@ -3,13 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as LoginActions from '../login/LoginActions';
 
-Navigation.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
-
 
 const navContainer = {
 	height: '40px',
@@ -66,7 +59,12 @@ class Navigation extends React.Component {
 	}
 }
 
-
+Navigation.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {
