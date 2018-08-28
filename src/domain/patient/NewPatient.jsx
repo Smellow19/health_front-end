@@ -1,13 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
+import PropTypes from 'prop-types';
 
-const createPatient = {
-	textAlign: 'left',
+NewPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
 };
+
+
 
 const newPatientContainer = {
 	margin: 'auto',

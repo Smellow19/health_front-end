@@ -4,9 +4,13 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
+import PropTypes from 'prop-types';
 
-const createPatient = {
-	textAlign: 'left',
+EditPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
 };
 
 const editPatientContainer = {
@@ -32,12 +36,6 @@ const patientInput = {
 	marginTop: '5px',
 	marginBottom: '5px'
 
-};
-
-const buttonStyle = {
-	width: '80px',
-	marginLeft: '50px',
-	marginTop: '20px',
 };
 
 
@@ -67,7 +65,6 @@ class EditPatient extends React.Component {
 
 	handleEditPatientSubmit() {
 		let ssn = this.props.patient.createPatient.ssn;
-		let patient = this.props.patient.createPatient;
 		this.props.dispatch(patientActions.handleEditSinglePatientSaga(ssn, this.props.patient.updatePatient));
 	}
 
