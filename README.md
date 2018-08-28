@@ -16,41 +16,39 @@ Open the Terminal on your computer and copy the command below:
 
 `git clone git@git.catalystitservices.com:MDW_2018_/Tyler-Bridges/Tyler_Final_Project/Final_Project_Frontend.git`
 
-## Second ##
+## Setting up the Database ##
 
-After you have cloned the repository, make sure you clone down and then change directories
-into the final-health-project-db.
+Download the database
 
-`git clone git@git.catalystitservices.com:MDW_2018_/Tyler-Bridges/Tyler_Final_Project/final-health-project-db.git`
+`$ git clone git@git.catalystitservices.com:CatalystTraining/final-health-project-db.git`
 
-after you have completed the cloning,  follow the commands below to build the database
-on your computer. This is important! Make sure you install docker first as it is necessary for 
-the following steps.
+Make sure that you have [Docker](https://www.docker.com/products/overview) installed
+on your local machine. You will need Docker in order to run the sample database image.
 
+### Using the Docker Image
 
-### Building The Docker Image ###
+The following sections outline the use
 
-docker build -t scdb .            
+#### Building The Docker Image
 
-docker run -d -p 27017:27017 --name scdb scdb        
+```
+$ docker build -t healthdb .
+```
+#### Running The Docker Image
+```
+$ docker run -d -p 27017:27017 --name healthdb healthdb        
+```
 
 ### Connecting to MongoDB ###
 
 You can use MongoDB Compass, RoboMongo, or the Terminal to connect to the
-running MongoDB instance. All collections are located in the 'gcdb' database.
+running MongoDB instance. All collections are located in the healthdb database.
 We would recommend using Kitematic to find the port on localhost that your
 MongoDB is running on, as it may differ from one device to another.
 
 ### In a terminal window: ###
 
-$ docker exec -it scdb mongo - will connect to the running container and start the mongo shell.
-`...
-> show databases
-    admin
-    scdb
-    local
-> type your commands here...
-`
+$ docker exec -it healthdb mongo - will connect to the running container and start the mongo shell.
 
 ### For MongoDB Compass: ###
 
