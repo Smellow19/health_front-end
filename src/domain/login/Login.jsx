@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as LoginActions from'./LoginActions';
 
 
@@ -24,6 +25,7 @@ const input = {
 	paddingTop: '20px',
 
 };
+
 
 
 class Login extends React.Component {
@@ -69,6 +71,10 @@ class Login extends React.Component {
 	}
 }
 
+Login.propTypes = {
+	login: PropTypes.object,
+	dispatch: PropTypes.function,
+};
 
 export default connect((state) => {
 	return {
