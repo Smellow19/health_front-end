@@ -1,4 +1,4 @@
-#Catalyte Health Api and Frontend #
+# Catalyte Health Api and Frontend
 
 This is the Catalyte Health website and the API. The instructions on how to download and use will be found below.
 
@@ -8,9 +8,9 @@ Getting Started
 These instructions will get you a copy of the project up and running on your local
 machine for development and testing purposes.
 
-##First##
+## First ##
 
-###Download the Catalyte Health website###
+### Download the Catalyte Health website###
 
 Open the Terminal on your computer and copy the command below:
 
