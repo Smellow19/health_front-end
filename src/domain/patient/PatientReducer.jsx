@@ -2,14 +2,45 @@ import PatientConstants from './PatientConstant';
 
 const initState = {
 	patients: [],
-	patient: {},
+	patient: {
+		firstname: '',
+		lastname: '',
+		ssn: '',
+		age: 0,
+		gender: '',
+		height: 0,
+		weight: 0,
+		insurance: '',
+		address: {
+			street: '',
+			city: '',
+			state: '',
+			postal: '',
+		}
+
+	},
 	createredirect: false,
 	viewredirect: false,
 	editredirect: false,
+	homeredirect: false,
 	createPatient:{
 		gender: 'Male',
 	},
 	updatePatient: {
+		firstname: '',
+		lastname: '',
+		ssn: '',
+		age: 0,
+		gender: '',
+		height: 0,
+		weight: 0,
+		insurance: '',
+		address: {
+			street: '',
+			city: '',
+			state: '',
+			postal: '',
+		}
 
 	},
 	encounters: 0,
@@ -112,6 +143,13 @@ const PatientReducer = (state = initState, action) => {
 			return {
 				...state,
 				editredirect: action.bool
+			};
+		}
+
+		case PatientConstants.HANDLE_HOME_REDIRECT: {
+			return {
+				...state,
+				homeredirect: action.bool
 			};
 		}
 

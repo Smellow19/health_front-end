@@ -19,8 +19,9 @@ export function* WatchAll() {
 	];
 }
 // LOGIN SAGAS
+
+//This gets the user from the database
 export function* getUserSaga(action) {
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -34,27 +35,31 @@ export function* getUserSaga(action) {
 		}
 		return response.json();
 	}).then((data) => {
+
 		return data;
 	}).catch(err => {
-
+		return err;
 	});
 
-	if(data !== undefined) {
+	if (data.status === 404) {
+		let bool = false;
+		yield put(LoginActions.handleIsLoggedIn(bool));
+		yield put(LoginActions.handleErrors('User Not Found'));
+	} else if ((data.email === action.email) && (action.password === data.password)) {
 		let bool = true;
 		yield put(LoginActions.getUser(data));
 		yield put(LoginActions.handleErrors('Login Successful'));
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors(''));
 	} else {
-		let bool = false;
-		yield put(LoginActions.handleIsLoggedIn(bool));
-		yield put(LoginActions.handleErrors('User Not Found'));
+		yield put(LoginActions.handleErrors('There was an issue connecting to the server. Please check your connection and try again.'));
 	}
 }
 
 //PATIENT SAGAS
-export function* getPatientsSaga(action) {
-	let answer = '';
+
+//this get all patients from the database
+export function* getPatientsSaga() {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -69,22 +74,19 @@ export function* getPatientsSaga(action) {
 		return response.json();
 	}).then((data) => {
 		return data;
-	}).catch(err => {
-
 	});
 
 	if (data !== undefined) {
 		yield put(PatientActions.handleGetPatients(data));
 	} else {
-		let bool = false;
 		yield put(LoginActions.handleErrors(
 			'There were issues connecting to the database, please check your connection and try again.'
 		));
 	}
 }
 
+//This gets one patient from the database
 export function* getPatientSaga(action) {
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -99,22 +101,19 @@ export function* getPatientSaga(action) {
 		return response.json();
 	}).then((data) => {
 		return data;
-	}).catch(err => {
-
 	});
 
 	if (data !== undefined) {
 		yield put(PatientActions.handleGetSinglePatient(data));
 	} else {
-		let bool = false;
 		yield put(LoginActions.handleErrors(
 			'There were issues connecting to the database, please check your connection and try again.'
 		));
 	}
 }
 
+//This sends a json object to the database to update one patient
 export function* updatePatientSaga(action) {
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -135,9 +134,9 @@ export function* updatePatientSaga(action) {
 		return err;
 	});
 
-	if (data.status == 400 || data.status == 500) {
+	if (data.status === 400 || data.status === 500) {
 		yield put(LoginActions.handleErrors('Invalid user input.'));
-	} else if (data.status == 404) {
+	} else if (data.status === 404) {
 		yield put(LoginActions.handleErrors('User Not found.'));
 	} else {
 		yield put(PatientActions.handleEditRedirect(true));
@@ -145,8 +144,8 @@ export function* updatePatientSaga(action) {
 	}
 }
 
+//This gets a patients encounters from the database
 export function* getPatientEncountersSaga(action) {
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -166,11 +165,12 @@ export function* getPatientEncountersSaga(action) {
 	});
 	yield put(PatientActions.handleGetSinglePatientEncounters(data));
 	yield put(LoginActions.handleErrors(''));
+	yield put(PatientActions.handleViewRedirect(true));
+
 }
 
-
+//This sends a json object to the database to create a patient
 export function* CreateNewPatientsSaga(action) {
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -190,9 +190,9 @@ export function* CreateNewPatientsSaga(action) {
 		return err;
 	});
 
-	if (data.status == 409) {
+	if (data.status === 409) {
 		yield put(LoginActions.handleErrors('There is already a user with this information'));
-	} else if (data.status == 400 || data.status == 500) {
+	} else if (data.status === 400 || data.status === 500) {
 		yield put(LoginActions.handleErrors('Invalid user input.'));
 	} else {
 		yield put(PatientActions.handleCreateRedirect(true));
@@ -200,10 +200,8 @@ export function* CreateNewPatientsSaga(action) {
 }
 
 
-
+//this deletes a patient from the database if they have no encounters.
 export function* DeletePatientSaga(action) {
-	console.log('delete saga')
-	let answer = '';
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
 		'mode': 'cors'
@@ -212,7 +210,6 @@ export function* DeletePatientSaga(action) {
 		method: 'DELETE',
 		headers: myHeaders,
 	}).then((response) => {
-		console.log(response);
 		if (!response.ok) {
 			throw response;
 		}
@@ -220,20 +217,15 @@ export function* DeletePatientSaga(action) {
 	}).then((data) => {
 		return data;
 	}).catch(err => {
-		console.log(err + "Err")
 		return err;
 	});
 
-	if (data.status == 409) {
-		console.log(data);
-		console.log(data.status);
-		console.log("fail");
+	if (data.status === 409) {
 		yield put(LoginActions.handleErrors('Can not delete patients with encounters.'));
 
 	} else {
-		console.log("Pass");
 		yield put(LoginActions.handleErrors('Patient deleted'));
-		yield put(PatientActions.handleViewRedirect(true));
+		yield put(PatientActions.handleHomeRedirect(true));
 	}
 }
 

@@ -5,8 +5,8 @@ const initState = {
 		roles: ['user', 'user']
 	},
 	error: '',
-	email: 'werickson@superhealth.com',
-	password: 'password',
+	email: '',
+	password: '',
 	isLoggedIn: false,
 };
 
@@ -60,6 +60,10 @@ const LoginReducer = (state = initState, action) => {
 				...state,
 				error: action.error,
 			};
+		}
+
+		default: {
+			1 + 2;
 		}
 
 	}

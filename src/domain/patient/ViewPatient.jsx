@@ -4,9 +4,34 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
+import Encounters from './Encounters';
 
 const createPatient = {
 	textAlign: 'left',
+};
+
+const viewPatientContainer = {
+	width: '80%',
+	margin: 'auto',
+
+
+};
+
+const PatientInfo  = {
+	backgroundColor: 'white',
+	width: '50%',
+	margin: 'auto',
+	padding:'25px',
+};
+
+const buttonStyle = {
+	width: '100px',
+	marginLeft: '60px',
+	marginTop: '20px',
+};
+
+const encounterContainer  = {
+
 };
 
 class ViewPatient extends React.Component {
@@ -26,12 +51,16 @@ class ViewPatient extends React.Component {
 		this.props.dispatch(patientActions.handleViewRedirect(true));
 	}
 
-	// componentWillMount() {
-	// 	this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(this.props.patient.patient.id))
-	// }
+	componentWillMount() {
+		this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(this.props.patient.patient.id));
+		this.props.dispatch(patientActions.handleHomeRedirect(false));
+
+	}
 
 	componentWillUnmount() {
+		this.props.dispatch(patientActions.handleHomeRedirect(false));
 		this.props.dispatch(patientActions.handleViewRedirect(false));
+		this.props.dispatch(patientActions.handleEditRedirect(false));
 
 	}
 	
@@ -43,59 +72,67 @@ class ViewPatient extends React.Component {
 		const patient = this.props.patient.patient;
 
 
-		if (this.props.login.user.roles[1] != "ADMIN") {
-			deleteButton = null;
+		if (this.props.login.user.roles[1] != 'ADMIN') {
+			deleteButton = <p> </p>;
 		}
 		else {
 			deleteButton =
-				<button type="Submit" onClick={this.handleDeletePatient}>Delete Patient</button>;
+				<button type="Submit" style={buttonStyle} onClick={this.handleDeletePatient}>Delete Patient</button>;
 		}
 
-		if (this.props.login.user.roles[1] != "ADMIN") {
-			editButton = null;
+		if (this.props.login.user.roles[1] != 'ADMIN') {
+			editButton = <p> </p>;
 		}
 		else {
 			editButton =
-				<Link to="/edit_patient" ><button type="Submit">Edit Patient</button></Link>;
+				<Link to="/edit_patient" ><button type="Submit" style={buttonStyle}>Edit Patient</button></Link>;
 		}
 
 		if(patient.firstname == null) {
 			viewhtml=<div><p>There was an issue connecting to the database, please try again. </p></div>;
 		}else {
 			viewhtml= 
-			<div>
-				<p> Name: {patient.firstname} {patient.lastname} </p>
-				<p> Social Security Number: {patient.ssn} </p>
-				<p> Age: {patient.age} </p>
-				<p> Gender: {patient.gender} </p>
-				<p> Height: {patient.height} </p>
-				<p> Weight: {patient.weight} </p>
-				<p> Insurance: {patient.insurance} </p>
-				<p> Address: <br />{patient.address.street}<br /> 
-					{patient.address.city}, {patient.address.state}<br/> 
-					{patient.address.postal} 
-				</p>
-				<p> Office Visits: {this.props.patient.encounters.length} </p>
-				{editButton}
-				<Link to="/"><button type="Submit">Return</button></Link>
-				{deleteButton}
+			<div style= {viewPatientContainer}>
+				<h1> Patient Info </h1> 
+				<h2>{this.props.login.error}</h2>
+				<div style={PatientInfo}>
+					<p> Name: {patient.firstname} {patient.lastname} </p> <hr/>
+					<p> Social Security Number: {patient.ssn} </p><hr/>
+					<p> Age: {patient.age} </p><hr/>
+					<p> Gender: {patient.gender} </p><hr/>
+					<p> Height: {patient.height} </p><hr/>
+					<p> Weight: {patient.weight} </p><hr/>
+					<p> Insurance: {patient.insurance} </p><hr/>
+					<p> Address: <br />{patient.address.street}<br /> 
+						{patient.address.city}, {patient.address.state}<br/> 
+						{patient.address.postal} 
+					</p><hr/>
+					<p> Office Visits: {this.props.patient.encounters.length} </p><hr/>
+					{editButton}
+					<Link to="/"><button type="Submit" style={buttonStyle}>Return</button></Link>
+					{deleteButton}
+				</div>
+				<div style={encounterContainer}>
+					<h1> Office Visits </h1>
+					<Encounters />
 				
 				
+				</div>
 			</div>;
 		}
 		
 		
 
 		return (
-			<div>
+			<div >
 
-				<h1>{this.props.login.error}</h1>
+
 				{viewhtml}
 
 
-				{(this.props.login.isLoggedIn === false || this.props.login.user.roles[1] == undefined) &&
+				{(this.props.login.isLoggedIn === false) &&
 					< Redirect to={'/'} />}
-				{this.props.patient.viewredirect &&
+				{this.props.patient.homeredirect &&
 					< Redirect to={'/'} />}
 			</div>
 
