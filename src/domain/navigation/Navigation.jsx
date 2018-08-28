@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as LoginActions from '../login/LoginActions';
 
 
@@ -21,12 +22,14 @@ const linkStyle = {
 };
 
 
+
 class Navigation extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.handleLogout = this.handleLogout.bind(this);
 	}
+	
 
 	handleLogout() {
 		this.props.dispatch(LoginActions.handleIsLoggedOut());

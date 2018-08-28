@@ -19,6 +19,8 @@ export function* WatchAll() {
 	];
 }
 // LOGIN SAGAS
+
+//This gets the user from the database
 export function* getUserSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -43,19 +45,20 @@ export function* getUserSaga(action) {
 		let bool = false;
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors('User Not Found'));
-	} else if (data === 'TypeError: Failed to fetch') {
-		yield put(LoginActions.handleErrors('There was an issue connecting to the server. Please check your connection and try again.'));
-
-	} else {
+	} else if ((data.email === action.email) && (action.password === data.password)) {
 		let bool = true;
 		yield put(LoginActions.getUser(data));
 		yield put(LoginActions.handleErrors('Login Successful'));
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors(''));
-	} 	
+	} else {
+		yield put(LoginActions.handleErrors('There was an issue connecting to the server. Please check your connection and try again.'));
+	}
 }
 
 //PATIENT SAGAS
+
+//this get all patients from the database
 export function* getPatientsSaga() {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -82,6 +85,7 @@ export function* getPatientsSaga() {
 	}
 }
 
+//This gets one patient from the database
 export function* getPatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -108,6 +112,7 @@ export function* getPatientSaga(action) {
 	}
 }
 
+//This sends a json object to the database to update one patient
 export function* updatePatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -139,6 +144,7 @@ export function* updatePatientSaga(action) {
 	}
 }
 
+//This gets a patients encounters from the database
 export function* getPatientEncountersSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -163,7 +169,7 @@ export function* getPatientEncountersSaga(action) {
 
 }
 
-
+//This sends a json object to the database to create a patient
 export function* CreateNewPatientsSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
@@ -194,7 +200,7 @@ export function* CreateNewPatientsSaga(action) {
 }
 
 
-
+//this deletes a patient from the database if they have no encounters.
 export function* DeletePatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',

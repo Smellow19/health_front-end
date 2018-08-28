@@ -98,6 +98,8 @@ class EditPatient extends React.Component {
 
 					<div style={editpatient}>
 						<h1 id="top" > Edit Patient Details </h1>
+						<h2>All fields must be filled in</h2>
+
 						<h2>{this.props.login.error}</h2>
 
 						First Name:<br /><input type="text" name="firstname" style={patientInput} defaultValue={this.props.patient.updatePatient.firstname} placeholder="First Name" onChange={this.handlePatientInfoChange} /><br />

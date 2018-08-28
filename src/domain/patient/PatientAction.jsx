@@ -112,7 +112,6 @@ export const handleUpdateSinglePatientInfo = (patient) => {
 
 //Handles deleting a patient from the database
 export const handleDeletePatient = (ssn, encounters) => {
-	console.log(ssn)
 	return {
 		type: PatientConstant.HANDLE_DELETE_SINGLE_PATIENT_SAGA,
 		ssn: ssn,

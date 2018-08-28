@@ -5,8 +5,8 @@ const initState = {
 		roles: ['user', 'user']
 	},
 	error: '',
-	email: 'werickson@superhealth.com',
-	password: 'password',
+	email: '',
+	password: '',
 	isLoggedIn: false,
 };
 

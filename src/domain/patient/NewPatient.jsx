@@ -78,6 +78,7 @@ class NewPatient extends React.Component {
 		this.props.dispatch(patientActions.handleHomeRedirect(false));
 		this.props.dispatch(patientActions.handleViewRedirect(false));
 		this.props.dispatch(patientActions.handleEditRedirect(false));
+		this.props.dispatch(patientActions.handleCreateRedirect(false));
 	}
 
 	render() {
@@ -87,13 +88,14 @@ class NewPatient extends React.Component {
 
 				<div style={createpatient}>
 					<h1 id ="top" > Create New Patient </h1>
+					<h2>All fields must be filled in</h2>
 					<h2>{this.props.login.error}</h2>
 
 					First name:<br /><input type= "text" name= "firstname" style={patientInput} placeholder="First Name" onChange={this.handlePatientInfoChange} /><br/>
 					Last name: <br /><input type= "text" name= "lastname" style={patientInput} placeholder="Last Name" onChange={this.handlePatientInfoChange} />	<br/>
 					Social Security Number: (SSN must be in the following format: xxx-xx-xxxx) <br /><input type="text" name="ssn" style={patientInput} placeholder="SSN" onChange={this.handlePatientInfoChange} /><br/>
 					Age: (must be valid numbers) <br /><input type="text" name="age" style={patientInput} maxLength="3" placeholder="Age" onChange={this.handlePatientInfoChange} /><br/>
-					Gender:<br /><select name="gender" defaultValue="Male" onChange={this.handlePatientInfoChange}><br/>
+					Gender:<br /><select name="gender" defaultValue="Male" onChange={this.handlePatientInfoChange}>
 						<option value="Male">Male</option>
 						<option value="Female">Female</option>
 					</select><br />

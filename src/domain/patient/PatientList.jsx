@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import * as LoginActions from '../login/LoginActions';
 import Patients from './Patient';
+import PropTypes from 'prop-types';
+
 
 
 
@@ -13,7 +15,9 @@ const PatientListContainer = {
 	width: '80%',
 	margin: 'auto',
 	textAlign: 'center',
-}
+};
+
+
 
 class PatientList extends React.Component {
 	constructor(props) {
@@ -32,12 +36,14 @@ class PatientList extends React.Component {
 		this.props.dispatch(patientActions.handleHomeRedirect(false));
 		this.props.dispatch(patientActions.handleViewRedirect(false));
 		this.props.dispatch(patientActions.handleEditRedirect(false));
+		this.props.dispatch(patientActions.handleCreateRedirect(false));
+
 	}
 
 	render() {
 		let createHTML;
 
-		if (this.props.login.user.roles[1] != "ADMIN") {
+		if (this.props.login.user.roles[1] != 'ADMIN') {
 			createHTML = null;
 		}
 		else {

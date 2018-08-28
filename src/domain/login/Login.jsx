@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import * as LoginActions from'./LoginActions';
 
 
@@ -23,16 +22,6 @@ const container = {
 const input = {
 	margin: 'auto',
 	paddingTop: '20px',
-
-};
-
-const contentBorder ={
-	width: '88%',
-	// backgroundColor: '#6d7993',
-	border: 'solid black 10px',
-	margin: 'auto',
-	height: '500px',
-
 
 };
 
@@ -60,14 +49,12 @@ class Login extends React.Component {
 	}
 
 	render() {
-		if(this.props.login.user != undefined) {
-		}
 		return (
 			<div style={container}>
 				<div style={input}>
 					<h1> Login </h1>
-					<input type='text' name='email' placeholder='Email' defaultValue='werickson@superhealth.com' onChange={this.handleLoginInput} /><br /> <br />
-					<input type='password' name='password' placeholder='Password' defaultValue='password' onChange={this.handleLoginInput} /> <br />
+					<input type='text' name='email' placeholder='Email' defaultValue='' onChange={this.handleLoginInput} /><br /> <br />
+					<input type='password' name='password' placeholder='Password' defaultValue='' onChange={this.handleLoginInput} /> <br />
 					<p> {this.props.login.error} </p>
 					<br/>
 					<button type="submit" onClick={this.handleSubmit}> Submit </button>
