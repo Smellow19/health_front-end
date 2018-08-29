@@ -105,6 +105,8 @@ export function* getPatientSaga(action) {
 		return data;
 	}).catch(err => {
 		`There was an error ${err}`;
+	}).catch(err => {
+		`There was an error ${err}`;
 	});
 
 	if (data !== undefined) {
@@ -112,9 +114,7 @@ export function* getPatientSaga(action) {
 	} else {
 		yield put(LoginActions.handleErrors(
 			'There were issues connecting to the database, please check your connection and try again.'
-		)).catch(err => {
-			`There was an error ${err}`;
-		});
+		));
 	}
 }
 
