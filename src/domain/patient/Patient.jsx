@@ -13,8 +13,6 @@ const patientContainer = {
 	border: 'solid 1px black',
 	margin: '5px',
 	backgroundColor: 'white'
-	//backgroundColor: '#96858F'
-	// backgroundColor: '#6D7993'
 
 };
 

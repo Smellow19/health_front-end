@@ -59,7 +59,7 @@ class EditPatient extends React.Component {
 	}
 
 	handleEditPatientSubmit() {
-		let ssn = this.props.patient.createPatient.ssn;
+		let ssn = this.props.patient.updatePatient.ssn;
 		this.props.dispatch(patientActions.handleEditSinglePatientSaga(ssn, this.props.patient.updatePatient));
 	}
 
@@ -74,15 +74,7 @@ class EditPatient extends React.Component {
 	}
 
 	render() {
-		// let editPatientHtml;
-
-		// if (this.props.patient.patient === undefined) {
-		// 	editPatientHtml = <h1>There was an issue connecting to the database, please check your connection and try again. </h1>;
-		// }
-		// else {
-			
-
-		// }
+	
 		return (
 			<div>
 

@@ -124,6 +124,7 @@ export function* updatePatientSaga(action) {
 		'Content-Type': 'application/json',
 		'mode': 'cors'
 	});
+	yield(console.log(action.ssn));
 	let data = yield fetch(`http://localhost:8080/patients/update_patient?ssn=${action.ssn}`, {
 		method: 'PUT',
 		headers: myHeaders,

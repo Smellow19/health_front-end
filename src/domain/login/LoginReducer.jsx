@@ -12,7 +12,7 @@ const initState = {
 
 const LoginReducer = (state = initState, action) => {
 	switch (action.type) {
-		// Login Swtich Cases
+		// Login switch Cases
 		case LoginConstants.HANDLE_LOGIN: {
 			return { 
 				...state, 
