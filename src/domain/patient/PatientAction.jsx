@@ -7,7 +7,7 @@ export const handleGetPatientsSaga = (user) => {
 	return {
 		type: PatientConstant.HANDLE_GET_PATIENTS_SAGA,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 
@@ -61,7 +61,7 @@ export const handleCreatePatientSaga = (patient, user) => {
 		type: PatientConstant.HANDLE_CREATE_PATIENTS_SAGA,
 		patient: patient,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 
@@ -71,7 +71,7 @@ export const handleGetSinglePatientSaga = (ssn, user) => {
 		type: PatientConstant.HANDLE_GET_SINGLE_PATIENT_SAGA,
 		ssn: ssn,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 
@@ -89,7 +89,7 @@ export const handleEditSinglePatientSaga = (ssn, patient, user) => {
 		ssn: ssn,
 		patient: patient,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 
@@ -108,7 +108,7 @@ export const handleGetSinglePatientEncountersSaga = (patientId, user) => {
 		type: PatientConstant.HANDLE_GET_SINGLE_PATIENT_ENCOUNTERS_SAGA,
 		patientId: patientId,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 
@@ -127,7 +127,7 @@ export const handleDeletePatient = (ssn, encounters, user) => {
 		ssn: ssn,
 		encounters: encounters,
 		tokenType: user.tokenType,
-		accessToken: user.AccessToken
+		accessToken: user.accessToken
 	};
 };
 

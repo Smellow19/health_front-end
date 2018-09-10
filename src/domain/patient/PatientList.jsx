@@ -74,12 +74,12 @@ class PatientList extends React.Component {
 	}
 }
 
-PatientList.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+// PatientList.propTypes = {
+// 	patients: PropTypes.arr,
+// 	patient: PropTypes.object,
+// 	dispatch: PropTypes.function,
+// 	login: PropTypes.object,
+// };
 
 export default connect((state) => {
 	return {

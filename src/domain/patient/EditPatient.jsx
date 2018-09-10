@@ -60,7 +60,12 @@ class EditPatient extends React.Component {
 
 	handleEditPatientSubmit() {
 		let ssn = this.props.patient.updatePatient.ssn;
-		this.props.dispatch(patientActions.handleEditSinglePatientSaga(ssn, this.props.patient.updatePatient));
+		this.props.dispatch(
+			patientActions.handleEditSinglePatientSaga(
+				ssn,
+				this.props.patient.updatePatient,
+				this.props.login.user
+			));
 	}
 
 	componentWillUnmount() {
@@ -124,12 +129,12 @@ class EditPatient extends React.Component {
 	}
 }
 
-EditPatient.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+// EditPatient.propTypes = {
+// 	patients: PropTypes.arr,
+// 	patient: PropTypes.object,
+// 	dispatch: PropTypes.function,
+// 	login: PropTypes.object,
+// };
 
 export default connect((state) => {
 	return {

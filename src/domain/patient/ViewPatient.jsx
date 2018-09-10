@@ -43,7 +43,12 @@ class ViewPatient extends React.Component {
 	}
 
 	handleDeletePatient() {
-		this.props.dispatch(patientActions.handleDeletePatient(this.props.patient.patient.ssn, this.props.patient.encounters.length));
+		this.props.dispatch(
+			patientActions.handleDeletePatient(
+				this.props.patient.patient.ssn,
+				this.props.patient.encounters.length,
+				this.props.login.user
+			));
 
 	}
 	
@@ -52,7 +57,11 @@ class ViewPatient extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(this.props.patient.patient.id));
+		this.props.dispatch(
+			patientActions.handleGetSinglePatientEncountersSaga(
+				this.props.patient.patient.id,
+				this.props.login.user
+			));
 		this.props.dispatch(patientActions.handleHomeRedirect(false));
 
 	}

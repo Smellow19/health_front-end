@@ -25,8 +25,16 @@ class Patient extends React.Component {
 
 
 	handleViewPatient(e) {
-		this.props.dispatch(patientActions.handleGetSinglePatientSaga(e.target.value));
-		this.props.dispatch(patientActions.handleGetSinglePatientEncountersSaga(e.target.name));
+		this.props.dispatch(
+			patientActions.handleGetSinglePatientSaga(
+				e.target.value,
+				this.props.login.user
+			));
+		this.props.dispatch(
+			patientActions.handleGetSinglePatientEncountersSaga(
+				e.target.name,
+				this.props.login.user
+			));
 
 	}
 
@@ -68,12 +76,12 @@ class Patient extends React.Component {
 	}
 }
 
-Patient.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+// Patient.propTypes = {
+// 	patients: PropTypes.arr,
+// 	patient: PropTypes.object,
+// 	dispatch: PropTypes.function,
+// 	login: PropTypes.object,
+// };
 
 
 export default connect((state) => {

@@ -65,7 +65,9 @@ class NewPatient extends React.Component {
 	}
 
 	handleNewPatientSubmit() {
-		this.props.dispatch(patientActions.handleCreatePatientSaga(this.props.patient.createPatient));
+		
+		this.props.dispatch(patientActions.handleCreatePatientSaga(this.props.patient.createPatient,
+			this.props.login.user));
 	}
 
 	handleRedirect() {
@@ -127,12 +129,12 @@ class NewPatient extends React.Component {
 	}
 }
 
-NewPatient.propTypes = {
-	patients: PropTypes.arr,
-	patient: PropTypes.object,
-	dispatch: PropTypes.function,
-	login: PropTypes.object,
-};
+// NewPatient.propTypes = {
+// 	patients: PropTypes.arr,
+// 	patient: PropTypes.object,
+// 	dispatch: PropTypes.function,
+// 	login: PropTypes.object,
+// };
 
 
 export default connect((state) => {
