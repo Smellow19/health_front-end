@@ -3,9 +3,11 @@ import PatientConstant from './PatientConstant';
 
 
 //Gets all Patients saga action
-export const handleGetPatientsSaga = () => {
+export const handleGetPatientsSaga = (user) => {
 	return {
 		type: PatientConstant.HANDLE_GET_PATIENTS_SAGA,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 
@@ -54,18 +56,22 @@ export const handleEditPatientAddress = (name, value) => {
 };
 
 //Create Patient saga action
-export const handleCreatePatientSaga = (patient) => {
+export const handleCreatePatientSaga = (patient, user) => {
 	return {
 		type: PatientConstant.HANDLE_CREATE_PATIENTS_SAGA,
 		patient: patient,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 
 //Gets single Patient saga action
-export const handleGetSinglePatientSaga = (ssn) => {
+export const handleGetSinglePatientSaga = (ssn, user) => {
 	return {
 		type: PatientConstant.HANDLE_GET_SINGLE_PATIENT_SAGA,
 		ssn: ssn,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 
@@ -77,11 +83,13 @@ export const handleGetSinglePatient = (patient) => {
 	};
 };
 //Passes data from the edited patient to the saga 
-export const handleEditSinglePatientSaga = (ssn, patient) => {
+export const handleEditSinglePatientSaga = (ssn, patient, user) => {
 	return {
 		type: PatientConstant.HANDLE_EDIT_SINGLE_PATIENT_SAGA,
 		ssn: ssn,
 		patient: patient,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 
@@ -95,10 +103,12 @@ export const handleGetSinglePatientEncounters = (encounters) => {
 };
 
 //Passes patient ID into database to get the encounters of patient
-export const handleGetSinglePatientEncountersSaga = (patientId) => {
+export const handleGetSinglePatientEncountersSaga = (patientId, user) => {
 	return {
 		type: PatientConstant.HANDLE_GET_SINGLE_PATIENT_ENCOUNTERS_SAGA,
 		patientId: patientId,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 
@@ -111,11 +121,13 @@ export const handleUpdateSinglePatientInfo = (patient) => {
 };
 
 //Handles deleting a patient from the database
-export const handleDeletePatient = (ssn, encounters) => {
+export const handleDeletePatient = (ssn, encounters, user) => {
 	return {
 		type: PatientConstant.HANDLE_DELETE_SINGLE_PATIENT_SAGA,
 		ssn: ssn,
-		encounters: encounters
+		encounters: encounters,
+		tokenType: user.tokenType,
+		accessToken: user.AccessToken
 	};
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 
 
@@ -67,6 +68,12 @@ class Patient extends React.Component {
 	}
 }
 
+Patient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 
 export default connect((state) => {

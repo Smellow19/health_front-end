@@ -26,26 +26,28 @@ export function* getUserSaga(action) {
 		'Content-Type': 'application/json',
 		'mode': 'cors'
 	});
-	let data = yield fetch(`http://localhost:8080/user/login?email=${action.email}&password=${action.password}`, {
-		method: 'GET',
-		headers: myHeaders
+	let data = yield fetch('http://localhost:8080/api/auth/signin', {
+		method: 'POST',
+		headers: myHeaders,
+		body: JSON.stringify(action.payload)
 	}).then((response) => {
 		if (!response.ok) {
 			throw response;
 		}
 		return response.json();
 	}).then((data) => {
-
+		console.log(data.email);
+		console.log(action.payload.email);
 		return data;
 	}).catch(err => {
 		return err;
 	});
 
-	if (data.status === 404) {
+	if (data.status === 401) {
 		let bool = false;
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors('User Not Found'));
-	} else if ((data.email === action.email) && (action.password === data.password)) {
+	} else if (data.email === action.payload.email) {
 		let bool = true;
 		yield put(LoginActions.getUser(data));
 		yield put(LoginActions.handleErrors('Login Successful'));
@@ -59,10 +61,11 @@ export function* getUserSaga(action) {
 //PATIENT SAGAS
 
 //this get all patients from the database
-export function* getPatientsSaga() {
+export function* getPatientsSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
 	});
 	let data = yield fetch('http://localhost:8080/patients/all_patients', {
 		method: 'GET',
@@ -91,7 +94,8 @@ export function* getPatientsSaga() {
 export function* getPatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
 	});
 	let data = yield fetch(`http://localhost:8080/patients/find_patient?ssn=${action.ssn}`, {
 		method: 'GET',
@@ -122,7 +126,8 @@ export function* getPatientSaga(action) {
 export function* updatePatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
 	});
 	yield(console.log(action.ssn));
 	let data = yield fetch(`http://localhost:8080/patients/update_patient?ssn=${action.ssn}`, {
@@ -155,7 +160,8 @@ export function* updatePatientSaga(action) {
 export function* getPatientEncountersSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
 	});
 	let data = yield fetch(`http://localhost:8080/encounter/find_encounter?patientid=${action.patientId}`, {
 		method: 'GET',
@@ -180,7 +186,9 @@ export function* getPatientEncountersSaga(action) {
 export function* CreateNewPatientsSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
+
 	});
 	let data = yield fetch('http://localhost:8080/patients/create_patient', {
 		method: 'POST',
@@ -211,7 +219,9 @@ export function* CreateNewPatientsSaga(action) {
 export function* DeletePatientSaga(action) {
 	let myHeaders = new Headers({
 		'Content-Type': 'application/json',
-		'mode': 'cors'
+		'mode': 'cors',
+		'Authorization': action.tokenType + ' ' + action.accessToken,
+
 	});
 	let data = yield fetch(`http://localhost:8080/patients/delete_patient?ssn=${action.ssn}&encounters=${action.encounters}`, {
 		method: 'DELETE',

@@ -1,13 +1,16 @@
 import LoginConstants from './LoginConstants';
 
 const initState = {
+	payload: {
+		email: 'pwilliams@superhealth.com',
+		password: 'password'
+	},
 	user: {
 		roles: ['user', 'user']
 	},
 	error: '',
-	email: '',
-	password: '',
 	isLoggedIn: false,
+	jwt: ''
 };
 
 const LoginReducer = (state = initState, action) => {
@@ -15,16 +18,18 @@ const LoginReducer = (state = initState, action) => {
 		// Login switch Cases
 		case LoginConstants.HANDLE_LOGIN: {
 			return { 
-				...state, 
-				[action.name]: action.value
+				...state,
+				payload: {
+					...state.payload,
+					[action.name]: action.value
+				} 
 			};
 		}
 
 		case LoginConstants.HANDLE_GET_USER_SAGA: {
 			return {
 				...state,
-				email: action.email,
-				password: action.password
+				payload: action.payload
 			};
 		}
 

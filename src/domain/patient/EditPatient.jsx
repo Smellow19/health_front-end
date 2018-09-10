@@ -88,7 +88,7 @@ class EditPatient extends React.Component {
 
 						First Name:<br /><input type="text" name="firstname" style={patientInput} defaultValue={this.props.patient.updatePatient.firstname} placeholder="First Name" onChange={this.handlePatientInfoChange} /><br />
 						Last Name:<br /><input type="text" name="lastname" style={patientInput} defaultValue={this.props.patient.updatePatient.lastname} placeholder="Last Name" onChange={this.handlePatientInfoChange} /><br />
-						Social Security Number: (SSN must be in the following format: xxx-xx-xxxx) <br /><input type="text" name="ssn" style={patientInput} defaultValue={this.props.patient.updatePatient.ssn} placeholder="SSN" onChange={this.handlePatientInfoChange} /><br />
+						Social Security Number: (SSN must be in the following format: xxx-xx-xxxx) <br /><input type="text" name="ssn" style={patientInput} readOnly defaultValue={this.props.patient.updatePatient.ssn} placeholder="SSN" onChange={this.handlePatientInfoChange} /><br />
 						Age:(must be valid numbers)<br /><input type="text" name="age" style={patientInput} defaultValue={this.props.patient.updatePatient.age} maxLength="3" placeholder="Age" onChange={this.handlePatientInfoChange} /><br />
 						Gender: <br /><select name="gender" defaultValue={this.props.patient.updatePatient.gender} onChange={this.handlePatientInfoChange}>
 							<option value="Male">Male</option>

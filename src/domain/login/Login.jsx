@@ -44,7 +44,7 @@ class Login extends React.Component {
 
 	//Calls the get user saga to fetch the user matching the email and password
 	handleSubmit() {
-		this.props.dispatch(LoginActions.getUserSaga(this.props.login.email, this.props.login.password));
+		this.props.dispatch(LoginActions.getUserSaga(this.props.login.payload));
 	}
 
 	componentWillUnmount() {
@@ -71,10 +71,10 @@ class Login extends React.Component {
 	}
 }
 
-Login.propTypes = {
-	login: PropTypes.object,
-	dispatch: PropTypes.function,
-};
+// Login.propTypes = {
+// 	login: PropTypes.object,
+// 	dispatch: PropTypes.function,
+// };
 
 export default connect((state) => {
 	return {

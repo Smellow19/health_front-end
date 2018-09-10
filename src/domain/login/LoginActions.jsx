@@ -1,4 +1,5 @@
 import LoginConstants from './LoginConstants';
+import jwt_decode from 'jwt-decode';
 
 //Updates state to the user's inputted email and password.
 export const handleLogin = (name, value) => {
@@ -9,18 +10,17 @@ export const handleLogin = (name, value) => {
 	};
 };
 //Takes email and password from state and passes it into the fetch call.
-export const getUserSaga = (email, password) => {
+export const getUserSaga = (payload) => {
 	return {
 		type: LoginConstants.HANDLE_GET_USER_SAGA,
-		email: email,
-		password: password 
+		payload: payload
 	};
 };
 //Upon successful fetch, This sets the User inside of the store.
-export const getUser = (user) => {
+export const getUser = (data) => {
 	return {
 		type: LoginConstants.HANDLE_GET_USER,
-		user: user
+		user: data
 	};
 };
 

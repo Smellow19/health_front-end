@@ -30,7 +30,7 @@ class PatientList extends React.Component {
 
 
 	componentDidMount() {
-		this.props.dispatch(patientActions.handleGetPatientsSaga());
+		this.props.dispatch(patientActions.handleGetPatientsSaga(this.props.login.user));
 	}
 
 	componentWillUnmount() {
