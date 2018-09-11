@@ -31,29 +31,33 @@ export function* getUserSaga(action) {
 		headers: myHeaders,
 		body: JSON.stringify(action.payload)
 	}).then((response) => {
+		
 		if (!response.ok) {
+			console.log(response);
 			throw response;
 		}
 		return response.json();
 	}).then((data) => {
-		console.log(data.email);
+		console.log(data);
 		console.log(action.payload.email);
 		return data;
 	}).catch(err => {
 		return err;
 	});
 
-	if (data.status === 401) {
-		let bool = false;
-		yield put(LoginActions.handleIsLoggedIn(bool));
-		yield put(LoginActions.handleErrors('User Not Found'));
-	} else if (data.email === action.payload.email) {
+	if (data.email === action.payload.email) {
 		let bool = true;
 		yield put(LoginActions.getUser(data));
 		yield put(LoginActions.handleErrors('Login Successful'));
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors(''));
-	} else {
+	} else if (data.status === 401 || 400) {
+		
+		let bool = false;
+		yield put(LoginActions.handleIsLoggedIn(bool));
+		yield put(LoginActions.handleErrors('User Not Found'));
+	}
+	   else {
 		yield put(LoginActions.handleErrors('There was an issue connecting to the server. Please check your connection and try again.'));
 	}
 }

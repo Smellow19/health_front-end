@@ -38,8 +38,19 @@ class Login extends React.Component {
 	// records the user input so it can be passed into the getUser fetch call
 	handleLoginInput(e)  {
 		let name = e.target.name;
-		let value = e.target.value;
-		this.props.dispatch(LoginActions.handleLogin(name, value));
+
+		if(name === 'password') {
+			let value = e.target.value;
+			let encryptedPassword;
+			encryptedPassword = window.btoa(value);
+			console.log(encryptedPassword);
+			this.props.dispatch(LoginActions.handleLogin(name, encryptedPassword));
+		} else {
+			let value = e.target.value;
+			this.props.dispatch(LoginActions.handleLogin(name, value));
+
+		}
+
 	}
 
 	//Calls the get user saga to fetch the user matching the email and password

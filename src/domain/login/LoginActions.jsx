@@ -1,5 +1,4 @@
 import LoginConstants from './LoginConstants';
-import jwt_decode from 'jwt-decode';
 
 //Updates state to the user's inputted email and password.
 export const handleLogin = (name, value) => {
