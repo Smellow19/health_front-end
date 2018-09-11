@@ -5,7 +5,7 @@ import Content from './content';
 
 const appStyle= {
 	margin: 'none',
-}
+};
 class App extends Component {
 	render() {
 		return (

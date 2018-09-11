@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import * as patientActions from './PatientAction';
-import * as LoginActions from '../login/LoginActions';
+import PropTypes from 'prop-types';
 import Encounters from './Encounters';
-
-const createPatient = {
-	textAlign: 'left',
-};
 
 const viewPatientContainer = {
 	width: '80%',
@@ -151,7 +147,12 @@ class ViewPatient extends React.Component {
 	}
 }
 
-
+ViewPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {

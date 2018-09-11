@@ -129,12 +129,12 @@ class NewPatient extends React.Component {
 	}
 }
 
-// NewPatient.propTypes = {
-// 	patients: PropTypes.arr,
-// 	patient: PropTypes.object,
-// 	dispatch: PropTypes.function,
-// 	login: PropTypes.object,
-// };
+NewPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 
 export default connect((state) => {

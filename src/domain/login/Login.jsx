@@ -43,7 +43,6 @@ class Login extends React.Component {
 			let value = e.target.value;
 			let encryptedPassword;
 			encryptedPassword = window.btoa(value);
-			console.log(encryptedPassword);
 			this.props.dispatch(LoginActions.handleLogin(name, encryptedPassword));
 		} else {
 			let value = e.target.value;
@@ -82,10 +81,10 @@ class Login extends React.Component {
 	}
 }
 
-// Login.propTypes = {
-// 	login: PropTypes.object,
-// 	dispatch: PropTypes.function,
-// };
+Login.propTypes = {
+	login: PropTypes.object,
+	dispatch: PropTypes.function,
+};
 
 export default connect((state) => {
 	return {

@@ -59,12 +59,12 @@ class Navigation extends React.Component {
 	}
 }
 
-// Navigation.propTypes = {
-// 	patients: PropTypes.arr,
-// 	patient: PropTypes.object,
-// 	dispatch: PropTypes.function,
-// 	login: PropTypes.object,
-// };
+Navigation.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {

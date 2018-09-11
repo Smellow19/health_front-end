@@ -33,13 +33,10 @@ export function* getUserSaga(action) {
 	}).then((response) => {
 		
 		if (!response.ok) {
-			console.log(response);
 			throw response;
 		}
 		return response.json();
 	}).then((data) => {
-		console.log(data);
-		console.log(action.payload.email);
 		return data;
 	}).catch(err => {
 		return err;
@@ -52,12 +49,11 @@ export function* getUserSaga(action) {
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors(''));
 	} else if (data.status === 401 || 400) {
-		
+
 		let bool = false;
 		yield put(LoginActions.handleIsLoggedIn(bool));
 		yield put(LoginActions.handleErrors('User Not Found'));
-	}
-	   else {
+	}  else {
 		yield put(LoginActions.handleErrors('There was an issue connecting to the server. Please check your connection and try again.'));
 	}
 }
@@ -133,7 +129,6 @@ export function* updatePatientSaga(action) {
 		'mode': 'cors',
 		'Authorization': action.tokenType + ' ' + action.accessToken,
 	});
-	yield(console.log(action.ssn));
 	let data = yield fetch(`http://localhost:8080/patients/update_patient?ssn=${action.ssn}`, {
 		method: 'PUT',
 		headers: myHeaders,

@@ -129,12 +129,12 @@ class EditPatient extends React.Component {
 	}
 }
 
-// EditPatient.propTypes = {
-// 	patients: PropTypes.arr,
-// 	patient: PropTypes.object,
-// 	dispatch: PropTypes.function,
-// 	login: PropTypes.object,
-// };
+EditPatient.propTypes = {
+	patients: PropTypes.arr,
+	patient: PropTypes.object,
+	dispatch: PropTypes.function,
+	login: PropTypes.object,
+};
 
 export default connect((state) => {
 	return {
